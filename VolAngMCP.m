@@ -1,4 +1,4 @@
-
+function [anglez, angley, MCP] = VolAngMCP()
 %Finding angles of rotation for the different subjects for Y and Z%
 Data=xlsread('/Users/finks/Desktop/Projects/STN_Figure/STN_Midline.xlsx');
 
@@ -32,3 +32,4 @@ PCz=Data(:,7);
 X=(ACx+PCx)./2;
 Y=(ACy+PCy)./2;
 Z=(ACz+PCz)./2;
+anglez; angley; MCP=[X,Y,Z];
