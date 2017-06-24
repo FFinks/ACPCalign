@@ -1,4 +1,4 @@
-function [angley, anglez, MCP] = ImgAngleRot()
+
 %Finding angles of rotation for the different subjects for Y and Z%
 Data=xlsread('/Users/finks/Desktop/Projects/STN_Figure/STN_Midline.xlsx');
 
@@ -22,7 +22,6 @@ Deltay=(ACy-PCy);
 angley=atand(Deltax./Deltay);
 
 %locating MCP
-Data=xlsread('/Users/finks/Desktop/Projects/STN_Figure/STN_Midline.xlsx');
 
 ACx=Data(:,2);
 ACy=Data(:,3);
@@ -34,3 +33,7 @@ X=(ACx+PCx)./2;
 Y=(ACy+PCy)./2;
 Z=(ACz+PCz)./2;
 MCP=[X,Y,Z];
+
+%Calculation for X rotation - use AC and MCP
+
+anglex=atand(Deltaz./Dela

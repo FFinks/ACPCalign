@@ -1,8 +1,30 @@
-% Aligning along MCP and rotating %
+Data=xlsread('/Users/finks/Desktop/Projects/STN_Figure/STN_Midline.xlsx');
+
+%Calculation for Z rotation - Use Dorsal and Ventral Points%
+DPx=Data(:,33);
+DPz=Data(:,10);
+VPx=Data(:,11);
+VPz=Data(:,13);
+Deltax=(DPx-VPx);
+Deltaz=(DPz-VPz);
+anglez=atand(Deltax./Deltaz);
+
+%Calculation for Y rotation - Use ACPC  Points%
+
+ACx=Data(:,24);
+ACy=Data(:,25);
+PCx=Data(:,27);
+PCy=Data(:,28);
+Deltax=(ACx-PCx);
+Deltay=(ACy-PCy);
+angley=atand(Deltax./Deltay);
+
+MCP = [Data(:,30),Data(:,31),Data(:,32)];
 
 %vector of patient ids and full matrices of translation matrix and angles
 pid = getDirFileNames(0,'/Users/finks/Desktop/Projects/STN_Figure/STN_Fig_Imgs');
 
+%this is what needs tweaking to improve MCP alignment
 tmat=MCP;%.*-1; %inverse of MCP matrix for translation 
 
 negangley=angley.*-1; %need to rotate opposite direction - inverse of angles

@@ -32,3 +32,10 @@ PCz=Data(:,7);
 X=(ACx+PCx)./2;
 Y=(ACy+PCy)./2;
 Z=(ACz+PCz)./2;
+MCP=[X,Y,Z];
+
+%Calculation for X rotation - use AC and MCP
+
+Deltaz=ACz-MCP(:,3);
+Deltay=MCP(:,2)-ACy;
+anglex=atand(Deltaz./Deltay);
