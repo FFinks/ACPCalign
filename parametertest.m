@@ -35,6 +35,7 @@ negangley=angley.*-1; %need to rotate opposite direction - inverse of angles
 %angle calculation by the angle rotation so that the values for the second
 %rotation aren't all screwey after the first rotation 
 %IE
+%THIS LOOKS GOOD! 
 DPx=Data(:,8).*negangley(K,1);
 DPz=Data(:,10).*negangley(K,1);
 VPx=Data(:,11).*negangley(K,1);
@@ -45,7 +46,7 @@ anglez=atand(Deltax./Deltaz);
 neganglez=anglez.*-1;
 
 %loop of loading patient number and cell number
-for K = 1:1
+for K = 2:5
 pInd=cell2mat (pid(K));   
     
 mri=ea_load_nii(['/Users/finks/Desktop/Projects/STN_Figure/STN_Fig_Imgs/' num2str(pInd) '/T1w_hires.nii']);
