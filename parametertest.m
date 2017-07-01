@@ -28,6 +28,20 @@ pid = getDirFileNames(0,'/Users/finks/Desktop/Projects/STN_Figure/STN_Fig_Imgs')
 tmat=MCP.*-1; %inverse of MCP matrix for translation 
 
 negangley=angley.*-1; %need to rotate opposite direction - inverse of angles
+%neganglez=anglez.*-1;
+
+%__________ fran fucking with the code 170630
+%what I'm thinking needs to happen is to multiply the points used in the
+%angle calculation by the angle rotation so that the values for the second
+%rotation aren't all screwey after the first rotation 
+%IE
+DPx=Data(:,8).*negangley(K,1);
+DPz=Data(:,10).*negangley(K,1);
+VPx=Data(:,11).*negangley(K,1);
+VPz=Data(:,13).*negangley(K,1);
+Deltax=(DPx-VPx);
+Deltaz=(DPz-VPz);
+anglez=atand(Deltax./Deltaz);
 neganglez=anglez.*-1;
 
 %loop of loading patient number and cell number
@@ -39,10 +53,10 @@ mri_vol=mri.img;
 
 %translate and rotate 
 tmri_vol=imtranslate(mri_vol, tmat(K,:), 'OutputView', 'full');
-rmri_vol=imrotate3(tmri_vol,neganglez(K,1),[0 0 1]);
-rbmri_vol=imrotate3(rmri_vol,negangley(K,1),[0 1 0]);
+rmri_vol=imrotate3(tmri_vol,negangley(K,1),[0 1 0]);
+rbmri_vol=imrotate3(rmri_vol,neganglez(K,1),[0 0 1]);
 nii=make_nii(rbmri_vol);
-filename=sprintf('rot2%s.nii',pInd);
+filename=sprintf('rotangletest%s.nii',pInd);
 cd /Users/finks/Desktop/Projects/STN_Figure/STN_Fig_Rot
 save_nii(nii, filename);
 end
