@@ -39,8 +39,8 @@ mri_vol=mri.img;
 
 %translate and rotate 
 tmri_vol=imtranslate(mri_vol, tmat(K,:), 'OutputView', 'full');
-rmri_vol=imrotate3(tmri_vol,negangley(K,1),[0 1 0]);
-rbmri_vol=imrotate3(rmri_vol,neganglez(K,1),[0 0 1]);
+rmri_vol=imrotate3(tmri_vol,neganglez(K,1),[0 0 1]);
+rbmri_vol=imrotate3(rmri_vol,negangley(K,1),[0 1 0]);
 nii=make_nii(rbmri_vol);
 filename=sprintf('rot2%s.nii',pInd);
 cd /Users/finks/Desktop/Projects/STN_Figure/STN_Fig_Rot
