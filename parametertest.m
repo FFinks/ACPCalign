@@ -5,10 +5,6 @@ pid = getDirFileNames(0,'/Users/finks/Desktop/Projects/STN_Figure/STN_Fig_Imgs')
 
 tmat=MCP.*-1; %inverse of MCP matrix for translation 
 
-%defining MCP coordinates
-MCPz=MCP(:,3);
-MCPy=MCP(:,2);
-
 negangley=angley.*-1; 
 neganglez=anglez.*-1; 
 
@@ -29,23 +25,13 @@ mri_vol=mri.img;
 %angley=atand(Deltax./Deltaz);
 %negangley=angley.*-1;
 
-%trying to align AC, MCP, and PC for x rotation 
-%ACadjz=(ACz.*(cos(anglez(K,1)))-(ACz.*(sin(anglez(K,1)))));
-%ACadjy=(ACy.*(cos(angley(K,1)))-(ACy.*(sin(angley(K,1))))); 
-%MCPadjz=(MCPz.*(cos(anglez(K,1))-(MCPz.*(sin(anglez(K,1))))));
-%MCPadjy=(MCPy.*(cos(angley(K,1))-(MCPy.*(sin(angley(K,1))))));
-%the adjustments are super buggy - probably not worth it
-%Deltaz=(ACz-MCPz);
-%Deltay=(MCPy-ACy);
-%anglex=atand(Deltaz./Deltay);
 
 %translate and rotate 
 tmri_vol=imtranslate(mri_vol, tmat(K,:), 'OutputView', 'full');
 rmri_vol=imrotate3(tmri_vol,negangley(K,1),[0 1 0]);
-rbmri_vol=imrotate3(rmri_vol,neganglez(K,1),[0 0 MCP(K,3)]);
-%r3mri_vol=imrotate3(rbmri_vol,anglex(K,1),[MCP(K,1) 0 0]);
+rbmri_vol=imrotate3(rmri_vol,neganglez(K,1),[0 0 1]);
 nii=make_nii(rbmri_vol);
-filename=sprintf('rotchange0822e%s.nii',pInd);
+filename=sprintf('rotchange0823a%s.nii',pInd);
 cd /Users/finks/Desktop/Projects/STN_Figure/STN_Fig_Rot
 save_nii(nii, filename);
 end
